@@ -4,6 +4,7 @@ import { LineChart, Line, ResponsiveContainer } from 'recharts';
 import { MetricSummary, MetricDataPoint } from '../types/metrics';
 import { STATUS_BG_COLORS, STATUS_COLORS, MONTHS_TO_SHOW } from '../utils/constants';
 import { generateMetricInsight } from '../utils/insights';
+import { generateMetricDescription } from '../utils/descriptionGenerator';
 
 interface MetricCardProps {
   summary: MetricSummary;
@@ -21,7 +22,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({ summary, data, reference
   const [showDetails, setShowDetails] = useState(false);
   const recentData = data.slice(-MONTHS_TO_SHOW);
   const chartData = recentData.map(d => ({ value: d.value || 0 }));
-  // Description removed - dashboard now accepts any metrics dynamically
+  const description = generateMetricDescription(summary.metric, summary.target);
   const insight = generateMetricInsight(metric);
   
   const getTrendIcon = () => {
@@ -85,6 +86,16 @@ export const MetricCard: React.FC<MetricCardProps> = ({ summary, data, reference
                   Target: <span className="font-medium">{summary.target}</span>
                 </span>
               </div>
+              {description && (
+                <div className="space-y-2 mb-4">
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    <span className="font-semibold">What it measures:</span> {description.description}
+                  </p>
+                  <p className="text-xs text-gray-500 leading-relaxed">
+                    <span className="font-semibold">Why we track it:</span> {description.whyItMatters}
+                  </p>
+                </div>
+              )}
             </div>
             <div className="flex items-center space-x-2 ml-4">
               {reference && (
@@ -154,6 +165,27 @@ export const MetricCard: React.FC<MetricCardProps> = ({ summary, data, reference
       {showDetails && (
         <div className="border-t border-gray-200 p-6 bg-gray-50">
           <div className="space-y-4">
+            {description && (
+              <>
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-800 mb-2">What This Metric Measures</h4>
+                  <p className="text-sm text-gray-600">{description.description}</p>
+                </div>
+                
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-800 mb-2">Why It Matters</h4>
+                  <p className="text-sm text-gray-600">{description.whyItMatters}</p>
+                </div>
+                
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-800 mb-2">Category</h4>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    {description.category}
+                  </span>
+                </div>
+              </>
+            )}
+            
             <div>
               <h4 className="text-sm font-semibold text-gray-800 mb-2">Current Assessment</h4>
               <div className={`p-3 rounded-lg border-l-4 ${

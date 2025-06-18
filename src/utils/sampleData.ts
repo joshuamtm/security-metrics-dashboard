@@ -5,16 +5,16 @@ export const generateSampleData = (): Metric[] => {
   
   return [
     {
-      metric: 'Performance Score',
-      target: '90+',
-      reference: 'https://example.com/performance',
+      metric: 'Percentage of Encrypted Endpoints',
+      target: '98%',
+      reference: 'https://example.com/encryption',
       data: months.map((month, i) => ({
         month,
-        value: 88 + Math.sin(i) * 3 + Math.random() * 2
+        value: 88 + i * 1.5 + Math.random() * 2
       }))
     },
     {
-      metric: 'Compliance Rate',
+      metric: 'Security Training Compliance',
       target: '85%',
       reference: 'https://example.com/compliance',
       data: months.map((month, i) => ({
@@ -23,9 +23,9 @@ export const generateSampleData = (): Metric[] => {
       }))
     },
     {
-      metric: 'Quality Score',
-      target: '75%',
-      reference: 'https://example.com/quality',
+      metric: 'Password Health Score',
+      target: '85+',
+      reference: 'https://example.com/passwords',
       data: months.map((month, i) => ({
         month,
         value: 65 + i * 1.5 + Math.random() * 3
@@ -50,9 +50,9 @@ export const generateSampleData = (): Metric[] => {
       }))
     },
     {
-      metric: 'Training Completion',
-      target: '75%',
-      reference: 'https://example.com/training',
+      metric: 'Device Compliance Rate',
+      target: '90%',
+      reference: 'https://example.com/devices',
       data: months.map((month, i) => ({
         month,
         value: 60 + i * 2.5 + Math.random() * 3
