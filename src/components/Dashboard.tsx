@@ -38,6 +38,7 @@ export const Dashboard: React.FC = () => {
   }, [metrics]);
   
   const handleDataLoaded = (loadedMetrics: Metric[]) => {
+    console.log('Dashboard received metrics:', loadedMetrics);
     setMetrics(loadedMetrics);
     setShowUpload(false);
     setError('');

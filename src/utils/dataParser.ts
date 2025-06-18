@@ -23,11 +23,15 @@ export function parseDate(dateStr: string): Date {
 }
 
 export function transformRawData(rawData: RawMetricData[]): Metric[] {
-  return rawData.map(row => {
+  console.log('Raw data received:', rawData);
+  
+  const result = rawData.map(row => {
+    console.log('Processing row:', row);
     const dataPoints: MetricDataPoint[] = [];
     
     Object.entries(row).forEach(([key, value]) => {
       if (isDateColumn(key)) {
+        console.log(`Found date column: ${key} with value: ${value}`);
         dataPoints.push({
           month: key,
           value: parseMetricValue(value)
@@ -41,13 +45,19 @@ export function transformRawData(rawData: RawMetricData[]): Metric[] {
       return dateA.getTime() - dateB.getTime();
     });
     
-    return {
+    const metric = {
       metric: row.Metric,
       target: row.Target || '',
       reference: row.Reference,
       data: dataPoints
     };
+    
+    console.log('Created metric:', metric);
+    return metric;
   });
+  
+  console.log('Final transformed data:', result);
+  return result;
 }
 
 export async function parseCSVFile(file: File): Promise<Metric[]> {
