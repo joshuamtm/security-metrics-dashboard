@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/security-metrics-dashboard/static/css/main.54e30fa4.css",
-    "main.js": "/security-metrics-dashboard/static/js/main.536b2f7b.js",
+    "main.js": "/security-metrics-dashboard/static/js/main.80a04340.js",
     "static/js/453.e4e57dc4.chunk.js": "/security-metrics-dashboard/static/js/453.e4e57dc4.chunk.js",
     "index.html": "/security-metrics-dashboard/index.html",
     "main.54e30fa4.css.map": "/security-metrics-dashboard/static/css/main.54e30fa4.css.map",
-    "main.536b2f7b.js.map": "/security-metrics-dashboard/static/js/main.536b2f7b.js.map",
+    "main.80a04340.js.map": "/security-metrics-dashboard/static/js/main.80a04340.js.map",
     "453.e4e57dc4.chunk.js.map": "/security-metrics-dashboard/static/js/453.e4e57dc4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.54e30fa4.css",
-    "static/js/main.536b2f7b.js"
+    "static/js/main.80a04340.js"
   ]
 }
