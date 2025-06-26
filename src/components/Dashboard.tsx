@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Upload, Calendar } from 'lucide-react';
+import { Upload, Calendar, LogOut } from 'lucide-react';
 import { format } from 'date-fns';
 import { FileUpload } from './FileUpload';
 import { ExecutiveSummary } from './ExecutiveSummary';
@@ -9,12 +9,14 @@ import { ExecutiveInsights } from './ExecutiveInsights';
 import { Metric, DashboardData } from '../types/metrics';
 import { getMetricSummary, calculateOverallScore } from '../utils/calculations';
 import { generateExecutiveInsights } from '../utils/insights';
+import { useAuth } from '../contexts/AuthContext';
 
 export const Dashboard: React.FC = () => {
   const [metrics, setMetrics] = useState<Metric[]>([]);
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [error, setError] = useState<string>('');
   const [showUpload, setShowUpload] = useState(true);
+  const { logout } = useAuth();
   
   useEffect(() => {
     if (metrics.length > 0) {
@@ -60,12 +62,23 @@ export const Dashboard: React.FC = () => {
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <header className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">
-              Metrics Dashboard
-            </h1>
-            <p className="mt-2 text-gray-600">
-              Upload your metrics data to view insights and trends
-            </p>
+            <div className="flex justify-between items-start">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">
+                  Metrics Dashboard
+                </h1>
+                <p className="mt-2 text-gray-600">
+                  Upload your metrics data to view insights and trends
+                </p>
+              </div>
+              <button
+                onClick={logout}
+                className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </button>
+            </div>
           </header>
           
           {error && (
@@ -94,13 +107,22 @@ export const Dashboard: React.FC = () => {
                 Last updated: {format(dashboardData.lastUpdated, 'PPpp')}
               </div>
             </div>
-            <button
-              onClick={handleNewUpload}
-              className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <Upload className="w-4 h-4 mr-2" />
-              Upload New Data
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={handleNewUpload}
+                className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                Upload New Data
+              </button>
+              <button
+                onClick={logout}
+                className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </button>
+            </div>
           </div>
         </header>
         
