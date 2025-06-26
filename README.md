@@ -6,8 +6,11 @@ A flexible React-based web application that serves as an executive security metr
 
 **[View Dashboard](https://joshuamtm.github.io/security-metrics-dashboard/)**
 
+**🔐 Login Credentials:** The dashboard is password-protected. Use password: `SecureMetrics2024!`
+
 ## ✨ Features
 
+- **🔐 Password Protection**: Secure access with session-based authentication
 - **📁 File Upload**: Drag-and-drop interface for CSV and Excel files
 - **📊 Executive Summary**: Overview cards showing security posture and metric status  
 - **📈 Individual Metric Cards**: Detailed view of each metric with trends and sparklines
@@ -96,7 +99,11 @@ src/
 │   ├── ExecutiveSummary.tsx  # Summary cards
 │   ├── MetricCard.tsx    # Individual metric display
 │   ├── TrendChart.tsx    # Interactive charts
-│   └── MetricSelector.tsx    # Chart metric selection
+│   ├── MetricSelector.tsx    # Chart metric selection
+│   ├── Login.tsx         # Login component
+│   └── ProtectedRoute.tsx # Route protection wrapper
+├── contexts/            # React contexts
+│   └── AuthContext.tsx  # Authentication context
 ├── utils/               # Utility functions
 │   ├── dataParser.ts    # CSV/Excel parsing logic
 │   ├── calculations.ts  # Metric calculations
@@ -123,6 +130,20 @@ npm run build
 ```bash
 npm run deploy
 ```
+
+### 🔐 Authentication Configuration
+
+The dashboard includes password protection with session-based authentication. To change the password:
+
+1. Edit `src/contexts/AuthContext.tsx`
+2. Update the `PASSWORD_HASH` constant with your new password hash
+3. The current implementation uses a simple hash function for demonstration
+
+**Note:** For production use, consider:
+- Implementing proper backend authentication
+- Using bcrypt or similar for password hashing
+- Adding user management capabilities
+- Implementing password reset functionality
 
 ## 🤝 Contributing
 
